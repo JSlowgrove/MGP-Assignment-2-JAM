@@ -1,0 +1,10 @@
+/bin
+/gen
+/libs
+/obj
+/jni/SDL2_ttf
+/jni/SDL2_mixer
+/jni/SDL2_image
+/jni/SDL2
+/docs
+/Documentation.lnk
