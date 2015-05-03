@@ -7,7 +7,7 @@
 /**
 @brief Creates a Texture for use with a renderer.
 Creates a Texture from an image file, this can then be used with a renderer.
-DISCLAMER ~ This is a modified version of my PGG Assignment 1 Texture class.
+Reference ~ This is a modified version of my PGG Assignment 1 Texture class.
 */
 class JAM_Texture
 {

@@ -7,7 +7,7 @@
 /**
 @brief Creates a StateManager object.
 Creates a StateManager object to be inherited.
-DISCLAMER ~ This is a modified version of my PGG Assignment 1 State Manager class.
+Reference ~ This is a modified version of my PGG Assignment 1 State Manager class.
 */
 class JAM_StateManager
 {

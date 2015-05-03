@@ -4,7 +4,7 @@
 @brief Creates an Vec2 structure with functions
 Creates an Vec2 structure with overloaded operators to create a new variable type for use as a 2D vector.
 @author Jamie Slowgrove
-DISCLAMER ~ This is a modified version of my AI Assignment 1 Vec2 class.
+Reference ~ This is a modified version of my AI Assignment 1 Vec2 class.
 */
 struct JAM_Vec2
 {

@@ -7,7 +7,7 @@
 /**
 @brief Creates a Particle object.
 @author Jamie Slowgrove
-DISCLAMER ~ This is a modified version of my PGG Assignment 2 Particle class.
+Reference ~ This is a modified version of my PGG Assignment 2 Particle class.
 */
 class JAM_Particle
 {

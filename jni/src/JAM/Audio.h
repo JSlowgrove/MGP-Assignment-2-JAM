@@ -7,7 +7,7 @@
 /**
 @brief Creates a Audio object to handle the SDL_Mixer.
 @author Jamie Slowgrove
-DISCLAMER ~ This is a modified version of my AI Assignment 1 Audio class.
+Reference ~ This is a modified version of my AI Assignment 1 Audio class.
 */
 class JAM_Audio
 {

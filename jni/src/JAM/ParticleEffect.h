@@ -13,7 +13,7 @@
 /**
 @brief Creates a ParticleEffect object that handles Particle objects.
 @author Jamie Slowgrove
-DISCLAMER ~ This is a modified version of my PGG Assignment 2 Particle Effect class.
+Reference ~ This is a modified version of my PGG Assignment 2 Particle Effect class.
 */
 class JAM_ParticleEffect
 {

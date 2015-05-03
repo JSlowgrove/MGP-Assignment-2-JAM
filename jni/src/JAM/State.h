@@ -9,7 +9,7 @@ class JAM_StateManager;
 /**
 @brief Creates a State object.
 Creates a State object to be inherited.
-DISCLAMER ~ This is a modified version of my PGG Assignment 1 State class.
+Reference ~ This is a modified version of my PGG Assignment 1 State class.
 */
 class JAM_State
 {

@@ -9,7 +9,7 @@
 
 /**
 @brief Creates a Flocking object.
-DISCLAMER ~ Created using Pseudo code from https://www.macs.hw.ac.uk/~dwcorne/Teaching/Boids%20Pseudocode.htm
+Reference ~ This code is based upon Pseudo code from https://www.macs.hw.ac.uk/~dwcorne/Teaching/Boids%20Pseudocode.htm
 */
 class JAM_Flocking
 {

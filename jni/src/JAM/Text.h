@@ -8,7 +8,7 @@
 /**
 @brief Creates a Text Texture for use with a renderer
 Creates a Text Texture from an image file, this can then be used with a renderer.
-DISCLAMER ~ This is a modified version of my AI Assignment 1 Text class.
+Reference ~ This is a modified version of my AI Assignment 1 Text class.
 */
 class JAM_Text
 {
