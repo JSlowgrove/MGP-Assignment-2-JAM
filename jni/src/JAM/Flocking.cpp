@@ -1,4 +1,5 @@
 #include "Flocking.h"
+#include <cmath>
 
 /**************************************************************************************************************/
 
@@ -45,10 +46,10 @@ JAM_Flocking::~JAM_Flocking()
 void JAM_Flocking::update(float dt)
 {
 	/*initialise the resultant velocities*/
-	JAM_Vec2 v1 = { 0.0f, 0.0f };
-	JAM_Vec2 v2 = { 0.0f, 0.0f };
-	JAM_Vec2 v3 = { 0.0f, 0.0f };
-	JAM_Vec2 v4 = { 0.0f, 0.0f };
+	JAM_Vec2 v1 = JAM_Vec2( 0.0f, 0.0f );
+	JAM_Vec2 v2 = JAM_Vec2( 0.0f, 0.0f );
+	JAM_Vec2 v3 = JAM_Vec2( 0.0f, 0.0f );
+	JAM_Vec2 v4 = JAM_Vec2( 0.0f, 0.0f );
 
 	/*test each Boid*/
 	for (unsigned int i = 0; i < boids.size(); i++)
@@ -91,9 +92,9 @@ void JAM_Flocking::draw(SDL_Renderer* renderer)
 JAM_Vec2 JAM_Flocking::rule1(int boidIndex)
 {
 	/*initialise the new velocity*/
-	JAM_Vec2 vel = { 0.0f, 0.0f };
+	JAM_Vec2 vel = JAM_Vec2(0.0f, 0.0f);
 	/*initialise the center of mass*/
-	JAM_Vec2 cOfM = { 0.0f, 0.0f };
+	JAM_Vec2 cOfM = JAM_Vec2(0.0f, 0.0f);
 
 	/*test each Boid*/
 	for (unsigned int i = 0; i < boids.size(); i++)
@@ -122,7 +123,7 @@ JAM_Vec2 JAM_Flocking::rule1(int boidIndex)
 JAM_Vec2 JAM_Flocking::rule2(int boidIndex)
 {
 	/*the new velocity*/
-	JAM_Vec2 vel = { 0.0f, 0.0f };
+	JAM_Vec2 vel = JAM_Vec2(0.0f, 0.0f);
 
 	/*test each Boid*/
 	for (unsigned int i = 0; i < boids.size(); i++)
@@ -154,7 +155,7 @@ JAM_Vec2 JAM_Flocking::rule2(int boidIndex)
 JAM_Vec2 JAM_Flocking::rule3(int boidIndex)
 {
 	/*initialise the new velocity*/
-	JAM_Vec2 vel = { 0.0f, 0.0f };
+	JAM_Vec2 vel = JAM_Vec2(0.0f, 0.0f);
 
 	/*test each Boid*/
 	for (unsigned int i = 0; i < boids.size(); i++)
@@ -183,7 +184,7 @@ JAM_Vec2 JAM_Flocking::rule3(int boidIndex)
 JAM_Vec2 JAM_Flocking::roughBoundaries(int boidIndex)
 {
 	/*initialise the new velocity*/
-	JAM_Vec2 vel = { 0.0f, 0.0f };
+	JAM_Vec2 vel = JAM_Vec2(0.0f, 0.0f);
 
 	/*check if the Boid is off the right of the screen*/
 	if (boids[boidIndex]->getPosition().x > xBoundary)

@@ -54,6 +54,9 @@
     <ClCompile Include="src\JAM\Texture.cpp">
       <Filter>JAM Files\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\JAM\Audio.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="src\JAM\Vec2.h">
       <Filter>JAM Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

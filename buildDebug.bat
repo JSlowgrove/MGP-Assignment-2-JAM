@@ -1,4 +1,6 @@
 call C:\SDKs\android-ndk-r10d\ndk-build.cmd -j8
-pause
-call ant debug
-pause
+IF %ERRORLEVEL% NEQ 0 (
+	pause
+) else (
+	call ant debug
+)

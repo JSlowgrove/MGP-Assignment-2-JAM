@@ -8,78 +8,126 @@
 #include <SDL_mixer.h>
 
 #include "JAM/Texture.h"
+#include "JAM/StateManager.h"
+
+#include "Game.h"
 
 int main(int argc, char *argv[])
 {
+
+#ifdef _WIN32
+
 	/*Initialise SDL needed for desktop*/
-	/*
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) //Check SDL initialisation
 	{
 		//Failed initialisation
 		SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, "Failed to initialise SDL");
 		return -1;
 	}
-	*/
-	
+
+#endif
+
 	/*Initialise SDL_ttf*/
 	if (TTF_Init() < 0) /*Check SDL_ttf initialisation*/
 	{
-		/*Failed initialisation*/		
+		/*Failed initialisation*/
 		SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, "Failed to initialise SDL_ttf");
 		return -1;
 	}
 
+	Mix_Init(MIX_INIT_OGG);
+
 	/*Initialise SDL_mixer*/
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
-		/*Failed initialisation*/		
+		/*Failed initialisation*/
 		SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Failed to initialise SDL_Mixer");
 		return -1;
 	}
-	
+
 	/*Initialize PNG loading*/
-    int imgFlags = IMG_INIT_PNG;
-    if( !( IMG_Init( imgFlags ) & imgFlags ) )
-    {
-		/*Failed initialisation*/		
+	int imgFlags = IMG_INIT_PNG;
+	if (!(IMG_Init(imgFlags) & imgFlags))
+	{
+		/*Failed initialisation*/
 		SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Failed to initialise SDL_image");
 		return -1;
 	}
-	
-    SDL_Window *window;
-    SDL_Renderer *renderer;
 
-    if(SDL_CreateWindowAndRenderer(0, 0, 0, &window, &renderer) < 0)
-        exit(2);
+	/*Time Check*/
+	unsigned int lastTime = SDL_GetTicks();
 
-	JAM_Texture sprite("img/JAM.png", renderer);
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+	int winWidth;
+	int winHeight;
 
-    /* Main render loop */
-    Uint8 done = 0;
-    SDL_Event event;
-    while(!done)
+#ifdef __ANDROID__
+
+	if(SDL_CreateWindowAndRenderer(0, 0, 0, &window, &renderer) < 0)
+		exit(2);
+
+	SDL_GetWindowSize(window, &winWidth, &winHeight);
+
+#elif _WIN32
+
+	/*Create Window*/
+	int winPosX = 100;
+	int winPosY = 100;
+	winWidth = 640;
+	winHeight = 480;
+	window = SDL_CreateWindow("MGPDemo",  /*The first parameter is the window title*/
+		winPosX, winPosY,
+		winWidth, winHeight,
+		SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+
+	/*Create Renderer from the window*/
+	renderer = SDL_CreateRenderer(window, -1, 0);
+
+#endif
+
+	/*setup state manager*/
+	JAM_StateManager * stateManager = new JAM_StateManager();
+	/*set the initial state*/
+	stateManager->addState(new Game(stateManager, renderer, winWidth, winHeight));
+
+	/*Start Game Loop*/
+	bool go = true;
+	while (go)
 	{
-        /* Check for events */
-        while(SDL_PollEvent(&event))
-		{
-            if(event.type == SDL_QUIT || event.type == SDL_KEYDOWN || event.type == SDL_FINGERDOWN)
-			{
-				SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
-                done = 1;
-            }
-        }
-				
-		/* Draw a gray background */
-		SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
-		SDL_RenderClear(renderer);
-		
-		sprite.pushToScreen(renderer, 0, 0, 32, 32);
-	
-		/* Update the screen! */
-		SDL_RenderPresent(renderer);
-		
-		SDL_Delay(10);
-    }
+		/*Time Check*/
+		unsigned int current = SDL_GetTicks();
+		float deltaTime = (float)(current - lastTime) / 1000.0f;
+		lastTime = current;
 
-    exit(0);
+		/*handle the current state inputs*/
+		go = stateManager->input();
+
+		/*update the current state*/
+		stateManager->update(deltaTime);
+
+		/*set draw colour to white*/
+		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+		/*Clear the entire screen to the set colour*/
+		SDL_RenderClear(renderer);
+
+		/*draw the states*/
+		stateManager->draw();
+
+		/*display renderer*/
+		SDL_RenderPresent(renderer);
+
+		/*Time Limiter*/
+		if (deltaTime < (1.0f / 50.0f))
+		{
+			SDL_Delay((unsigned int)(((1.0f / 50.0f) - deltaTime)*1000.0f));
+		}
+	}
+	/*destroy data*/
+	delete stateManager;
+	SDL_DestroyWindow(window);
+	SDL_Quit();
+	exit(0);
+	return 0;
 }
