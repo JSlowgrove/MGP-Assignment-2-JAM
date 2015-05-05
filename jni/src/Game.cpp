@@ -36,41 +36,84 @@ bool Game::input()
 	SDL_Event incomingEvent;
 	while (SDL_PollEvent(&incomingEvent))
 	{
-		switch (incomingEvent.type)
+		
+#ifdef __ANDROID__
+
+		/*handle the android inputs*/
+		return androidInput(incomingEvent);
+
+#elif _WIN32	
+
+		/*handle the windows inputs*/
+		return windowsInput(incomingEvent);
+
+#endif
+
+	}
+	return true;
+}
+
+/**************************************************************************************************************/
+
+/*handles windows inputs*/
+bool Game::windowsInput(SDL_Event& incomingEvent)
+{
+	switch (incomingEvent.type)
+	{
+	case SDL_QUIT: /*If player closes the window, end the game loop*/
+
+		SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
+		return false;
+		break;
+
+	case SDL_MOUSEBUTTONDOWN:
+		if (incomingEvent.button.button == SDL_TOUCH_MOUSEID || incomingEvent.button.button == SDL_BUTTON_LEFT)
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Touch/Click");
+		break;
+	case SDL_KEYDOWN:
+
+		switch (incomingEvent.key.keysym.sym)
 		{
-		case SDL_QUIT: /*If player closes the window, end the game loop*/
+		case SDLK_ESCAPE: /*If Escape is pressed, end the game loop*/
 
 			SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
 			return false;
 			break;
 
-		case SDL_MOUSEBUTTONDOWN:
-			if (incomingEvent.button.button == SDL_TOUCH_MOUSEID || incomingEvent.button.button == SDL_BUTTON_LEFT)
-				SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Touch/Click");
-			break;
-		case SDL_KEYDOWN:
+		}
+		break;
+	}
+	return true;
+}
 
-			switch (incomingEvent.key.keysym.sym)
-			{
-			case SDLK_ESCAPE: /*If Escape is pressed, end the game loop*/
+/**************************************************************************************************************/
 
-				SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
-				return false;
-				break;
+/*handles android inputs*/
+bool Game::androidInput(SDL_Event& incomingEvent)
+{
+	switch (incomingEvent.type)
+	{
+	case SDL_QUIT: /*If player closes the window, end the game loop*/
 
-#ifdef __ANDROID__
+		SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
+		return false;
+		break;
 
-			case SDLK_AC_BACK: /*If Back is pressed on the phone, end the game loop*/
+	case SDL_MOUSEBUTTONDOWN:
+		if (incomingEvent.button.button == SDL_TOUCH_MOUSEID || incomingEvent.button.button == SDL_BUTTON_LEFT)
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Touch/Click");
+		break;
+	case SDL_KEYDOWN:
 
-				SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
-				return false;
-				break;
+		switch (incomingEvent.key.keysym.sym)
+		{
+		case SDLK_AC_BACK: /*If Back is pressed on the phone, end the game loop*/
 
-#endif
-
-			}
+			SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
+			return false;
 			break;
 		}
+		break;
 	}
 	return true;
 }
