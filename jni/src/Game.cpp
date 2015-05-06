@@ -36,7 +36,21 @@ bool Game::input()
 	SDL_Event incomingEvent;
 	while (SDL_PollEvent(&incomingEvent))
 	{
-		
+		switch (incomingEvent.type)
+		{
+		case SDL_QUIT: /*If player closes the window, end the game loop*/
+
+			SDL_Log("Exiting Main Loop");
+			return false;
+			break;
+
+		case SDL_MOUSEBUTTONDOWN:
+			if (incomingEvent.button.button == SDL_TOUCH_MOUSEID || incomingEvent.button.button == SDL_BUTTON_LEFT)
+				SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Touch/Click");
+			break;
+	}
+
+
 #ifdef __ANDROID__
 
 		/*handle the android inputs*/
@@ -49,7 +63,7 @@ bool Game::input()
 
 #endif
 
-	}
+}
 	return true;
 }
 
@@ -60,16 +74,6 @@ bool Game::windowsInput(SDL_Event& incomingEvent)
 {
 	switch (incomingEvent.type)
 	{
-	case SDL_QUIT: /*If player closes the window, end the game loop*/
-
-		SDL_Log("Exiting Main Loop");
-		return false;
-		break;
-
-	case SDL_MOUSEBUTTONDOWN:
-		if (incomingEvent.button.button == SDL_TOUCH_MOUSEID || incomingEvent.button.button == SDL_BUTTON_LEFT)
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Touch/Click");
-		break;
 	case SDL_KEYDOWN:
 
 		switch (incomingEvent.key.keysym.sym)
@@ -93,16 +97,6 @@ bool Game::androidInput(SDL_Event& incomingEvent)
 {
 	switch (incomingEvent.type)
 	{
-	case SDL_QUIT: /*If player closes the window, end the game loop*/
-
-		SDL_Log("Exiting Main Loop");
-		return false;
-		break;
-
-	case SDL_MOUSEBUTTONDOWN:
-		if (incomingEvent.button.button == SDL_TOUCH_MOUSEID || incomingEvent.button.button == SDL_BUTTON_LEFT)
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Touch/Click");
-		break;
 	case SDL_KEYDOWN:
 
 		switch (incomingEvent.key.keysym.sym)
