@@ -133,5 +133,11 @@ void Game::update(float dt)
 void Game::draw()
 {
 	/*draw the texture*/
-	texture->pushToScreen(renderer, 200, 180, 100, 100);
+	texture->pushToScreen(
+		renderer, 
+		(int)JAM_Utilities::scaleNumber(200, screenHeight), 
+		(int)JAM_Utilities::scaleNumber(180, screenHeight),
+		(int)JAM_Utilities::scaleNumber(100, screenHeight),
+		(int)JAM_Utilities::scaleNumber(100, screenHeight)
+		);
 }

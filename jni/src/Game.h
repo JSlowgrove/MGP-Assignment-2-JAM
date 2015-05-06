@@ -6,6 +6,7 @@
 #include "JAM/StateManager.h"
 #include "JAM/Texture.h"
 #include "JAM/Audio.h"
+#include "JAM/Utilities.h"
 
 /**
 @brief Creates an Game object that inherits State and runs the Game.
