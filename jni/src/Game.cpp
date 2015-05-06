@@ -62,7 +62,7 @@ bool Game::windowsInput(SDL_Event& incomingEvent)
 	{
 	case SDL_QUIT: /*If player closes the window, end the game loop*/
 
-		SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
+		SDL_Log("Exiting Main Loop");
 		return false;
 		break;
 
@@ -76,7 +76,7 @@ bool Game::windowsInput(SDL_Event& incomingEvent)
 		{
 		case SDLK_ESCAPE: /*If Escape is pressed, end the game loop*/
 
-			SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
+			SDL_Log("Exiting Main Loop");
 			return false;
 			break;
 
@@ -95,7 +95,7 @@ bool Game::androidInput(SDL_Event& incomingEvent)
 	{
 	case SDL_QUIT: /*If player closes the window, end the game loop*/
 
-		SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
+		SDL_Log("Exiting Main Loop");
 		return false;
 		break;
 
@@ -109,7 +109,7 @@ bool Game::androidInput(SDL_Event& incomingEvent)
 		{
 		case SDLK_AC_BACK: /*If Back is pressed on the phone, end the game loop*/
 
-			SDL_LogMessage(SDL_LOG_CATEGORY_ERROR, SDL_LOG_PRIORITY_ERROR, "Exiting Main Loop");
+			SDL_Log("Exiting Main Loop");
 			return false;
 			break;
 		}
