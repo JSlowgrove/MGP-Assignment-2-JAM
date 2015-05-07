@@ -18,6 +18,7 @@
     <ClCompile Include="src\JAM\CollisionDetection.cpp" />
     <ClCompile Include="src\JAM\Entity.cpp" />
     <ClCompile Include="src\JAM\Flocking.cpp" />
+    <ClCompile Include="src\JAM\LOS.cpp" />
     <ClCompile Include="src\JAM\Node.cpp" />
     <ClCompile Include="src\JAM\Particle.cpp" />
     <ClCompile Include="src\JAM\ParticleEffect.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="src\JAM\CollisionDetection.h" />
     <ClInclude Include="src\JAM\Entity.h" />
     <ClInclude Include="src\JAM\Flocking.h" />
+    <ClInclude Include="src\JAM\LOS.h" />
     <ClInclude Include="src\JAM\Node.h" />
     <ClInclude Include="src\JAM\Particle.h" />
     <ClInclude Include="src\JAM\ParticleEffect.h" />
