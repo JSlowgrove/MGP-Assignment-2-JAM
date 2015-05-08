@@ -9,14 +9,15 @@
 #include "JAM/Utilities.h"
 
 /**
-@brief Creates an Game object that inherits State and runs the Game.
+@brief Creates a Game object that inherits State and runs the Game.
+@author Jamie Slowgrove
 */
 class Game : public JAM_State
 {
 private:
-	/**Test Texture*/
+	/**Test Texture.*/
 	JAM_Texture* texture;
-	/**A pointer to the background music*/
+	/**A pointer to the background music.*/
 	JAM_Audio* music;
 
 	/**
@@ -35,7 +36,7 @@ private:
 
 public:
 	/**
-	Constructs a Game object.
+	Constructs the Game object.
 	@param stateManager A pointer to the StateManager.
 	@param renderer A pointer to the renderer.
 	@param screenWidth The screen width.
@@ -44,7 +45,7 @@ public:
 	Game(JAM_StateManager* stateManager, SDL_Renderer* renderer, int screenWidth, int screenHeight);
 
 	/**
-	Destructs an Game object.
+	Destructs the Game object.
 	*/
 	~Game();
 
